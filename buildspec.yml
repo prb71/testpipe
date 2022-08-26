@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    commands:   
+      - apt-get update && curl -sL https://deb.nodesource.com/setup_14.x | sudo bash - && apt-get install -y nodejs
+  build:
+    commands:
+      - echo "Scan is started ......"
+  post_build:
+    commands:
+      - chmod +x ./scan.sh
+      - ./scan.sh $sonar_url $sonar_user_name $sonar_password $github_token $github_repo_url $service_name $github_user_name
