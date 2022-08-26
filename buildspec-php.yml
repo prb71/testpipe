@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      php: 7.4
+  pre_build:
+    commands:   
+      - apt-get update && apt-get install -y php
+      - apt-get install php-mysql php-curl php-xml php-mbstring php-imagick php-zip php-gd
+  build:
+    commands:
+      - echo "Scan is started ......"
+  post_build:
+    commands:
+      - chmod +x ./scan.sh
+      - ./scan.sh $sonar_url $sonar_user_name $sonar_password $github_token $github_repo_url $service_name $github_user_name
+

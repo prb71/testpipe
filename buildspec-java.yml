@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  pre_build:
+    commands:   
+      - apt-get update && apt install default-jre -y && apt install default-jdk -y && apt install maven -y
+  build:
+    commands:
+      - echo "Scan is started ......"
+  post_build:
+    commands:
+      - chmod +x ./scan.sh
+      - ./scan.sh $sonar_url $sonar_user_name $sonar_password $github_token $github_repo_url $service_name $github_user_name
+  
