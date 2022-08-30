@@ -19,7 +19,7 @@ git clone $github_repo_url /tmp/$service_name
 # downloding sonar scanner 
 wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
 unzip  -q  sonar-scanner-cli-4.7.0.2747-linux.zip
-export PATH=$PATH:./sonar-scanner-4.7.0.2747-linux/bin/
+export PATH=./sonar-scanner-4.7.0.2747-linux/bin:$PATH
 if [ $programming_language = "dotnet" ]; then
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
   cd /tmp/$service_name 
