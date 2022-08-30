@@ -1,6 +1,6 @@
 #!/bin/bash
 # Exit if any of the intermediate steps fail
-set -e
+set -xe
 sonar_url=$1
 sonar_user_name=$2
 sonar_password=$3
