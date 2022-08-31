@@ -13,7 +13,7 @@ programming_language=$8
 export GITHUB_TOKEN=$github_token
 ## cloning code from gitrepo
 echo "Setting up git credentials" && git config --global credential.helper 'store' && echo "https://$github_user_name:$github_token@github.com" > ~/.git-credentials
-
+mkdir /tmp
 git clone $github_repo_url /tmp/$service_name 
 
 # downloding sonar scanner 
@@ -22,20 +22,16 @@ unzip  -q  sonar-scanner-cli-4.7.0.2747-linux.zip
 export PATH="./sonar-scanner-4.7.0.2747-linux/bin:$PATH"
 if [ $programming_language = "dotnet" ]; then
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
-  mkdir /tmp
   cd /tmp/$service_name 
   dotnet-sonarscanner begin /k:$service_name /d:sonar.host.url=http://"$sonar_url"  /d:sonar.login="$sonar_user_name"  /d:sonar.password="$sonar_password"
   dotnet build 
   dotnet-sonarscanner end  /d:sonar.login="$sonar_user_name"  /d:sonar.password="$sonar_password"
 elif [ $programming_language = "java" ]; then
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
-#   mkdir /tmp
-  mkdir /tmp
   cd /tmp/$service_name 
   mvn clean verify sonar:sonar -Dsonar.projectKey="$service_name" -Dsonar.host.url=http://"$sonar_url" -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password"
 else
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
-  mkdir /tmp
   cd /tmp/$service_name 
   sonar-scanner -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password" -Dsonar.projectKey="$service_name" -Dsonar.host.url=http://"$sonar_url"
 fi
