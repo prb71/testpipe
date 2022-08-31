@@ -32,6 +32,7 @@ elif [ $programming_language = "java" ]; then
   mvn clean verify sonar:sonar -Dsonar.projectKey="$service_name" -Dsonar.host.url=http://"$sonar_url" -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password"
 else
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
-  cd ./project/$service_name 
-  sonar-scanner -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password" -Dsonar.projectKey="$service_name" -Dsonar.host.url=http://"$sonar_url"
+#   cd ./project/$service_name 
+#   sonar-scanner -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password" -Dsonar.projectKey="$service_name" -Dsonar.host.url=http://"$sonar_url"
+   sonar-scanner  -Dsonar.projectBaseDir=/tmp/"$service_name" -Dsonar.sources=/tmp/"$service_name"  -Dsonar.projectName="$service_name" -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password"  -Dsonar.projectKey="$service_name" -Dsonar.host.url=http://"$sonar_url"
 fi
