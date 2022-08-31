@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      dotnet: 6.0
+  pre_build:
+    commands:
+      - wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+      - dpkg -i packages-microsoft-prod.deb
+      - apt-get update && apt-get install -y dotnet-sdk-6.0 && apt-get install -y aspnetcore-runtime-6.0 && apt-get install -y dotnet-runtime-6.0
+      - dotnet tool install --global dotnet-sonarscanner  
+      - export PATH="$PATH:/root/.dotnet/tools"    
+  build:
+    commands:
+      - echo "Scan is started ......"
+  post_build:
+    commands:
+      - chmod +x ./scan.sh
+      - ./scan.sh $sonar_url $sonar_user_name $sonar_password $github_token $github_repo_url $service_name $github_user_name $programming_language
