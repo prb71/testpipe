@@ -23,8 +23,8 @@ export PATH="./sonar-scanner-4.7.0.2747-linux/bin:$PATH"
 
 if [ $programming_language = "dotnet" ]; then
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
-  dotnet-sonarscanner begin /k:$service_name /d:sonar.host.url=http://"$sonar_url" /d:sonar.projectBaseDir=/tmp/"$service_name" /d:sonar.sources=/tmp/"$service_name" /n:"$service_name" /d:sonar.login="$sonar_user_name"  /d:sonar.password="$sonar_password"
-  pwd && ls
+#   cd /tmp/$service_name
+  dotnet-sonarscanner begin /k:$service_name /d:sonar.host.url=http://"$sonar_url" /d:sonar.projectBaseDir=/tmp/"$service_name"  /n:"$service_name" /d:sonar.login="$sonar_user_name"  /d:sonar.password="$sonar_password"
   dotnet build /tmp/$service_name
   dotnet-sonarscanner end  /d:sonar.login="$sonar_user_name"  /d:sonar.password="$sonar_password"
 elif [ $programming_language = "java" ]; then
