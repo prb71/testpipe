@@ -13,8 +13,8 @@ programming_language=$8
 export GITHUB_TOKEN=$github_token
 ## cloning code from gitrepo
 echo "Setting up git credentials" && git config --global credential.helper 'store' && echo "https://$github_user_name:$github_token@github.com" > ~/.git-credentials
-mkdir ./project && pwd && ls
-git clone $github_repo_url ./project/$service_name 
+# mkdir ./project && pwd && ls
+git clone $github_repo_url /tmp/$service_name 
 
 # downloding sonar scanner 
 wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
