@@ -28,7 +28,7 @@ if [ $programming_language = "dotnet" ]; then
   dotnet-sonarscanner end  /d:sonar.login="$sonar_user_name"  /d:sonar.password="$sonar_password"
 elif [ $programming_language = "java" ]; then
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
-  mvn clean verify sonar:sonar -Dsonar.projectName="$service_name" -Dsonar.projectKey="$service_name" -Dsonar.projectBaseDir=/tmp/"$service_name" -Dsonar.sources=/tmp/"$service_name" -Dsonar.host.url=http://"$sonar_url" -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password"
+  mvn clean -f /tmp/$service_name verify sonar:sonar -Dsonar.projectName="$service_name" -Dsonar.projectKey="$service_name" -Dsonar.projectBaseDir=/tmp/"$service_name" -Dsonar.sources=/tmp/"$service_name" -Dsonar.host.url=http://"$sonar_url" -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password"
 else
   echo "Running sonar scanner with sonar username=$sonar_user_name password=$sonar_password ........"
   sonar-scanner  -Dsonar.projectBaseDir=/tmp/"$service_name" -Dsonar.sources=/tmp/"$service_name"  -Dsonar.projectName="$service_name" -Dsonar.login="$sonar_user_name" -Dsonar.password="$sonar_password"  -Dsonar.projectKey="$service_name" -Dsonar.host.url=http://"$sonar_url"
