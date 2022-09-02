@@ -13,7 +13,6 @@ programming_language=$8
 export GITHUB_TOKEN=$github_token
 ## cloning code from gitrepo
 echo "Setting up git credentials" && git config --global credential.helper 'store' && echo "https://$github_user_name:$github_token@github.com" > ~/.git-credentials
-
 git clone $github_repo_url /tmp/$service_name 
 
 # downloding sonar scanner 
