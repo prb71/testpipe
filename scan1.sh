@@ -18,6 +18,7 @@ elif [ $repo_type == "azure" ]; then
  git clone https://$repo_username:$repo_password@dev.azure.com/kuberdigitech/Kuber%20Platform/_git/$repo_name /tmp/$service_name
 else
  git clone https://$repo_password@github.com/$repo_username/$repo_name.git /tmp/$service_name
+fi
 
 echo "downloding sonar scanner" 
 wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
