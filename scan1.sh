@@ -12,7 +12,7 @@ programming_language=$8
 repo_type=$9
 
 echo "clonning project repository"
-if [ $repo_type == "github" ]; then
+if [ $repo_type == "bitbucket" ]; then
  git clone https://$repo_username:$repo_password@bitbucket.org/myacc/$repo_name.git /tmp/$service_name
 elif [ $repo_type == "azure" ]; then
  git clone https://$repo_username:$repo_password@dev.azure.com/kuberdigitech/Kuber%20Platform/_git/$repo_name /tmp/$service_name
