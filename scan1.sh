@@ -4,19 +4,22 @@ set -xe
 sonar_url=$1
 sonar_user_name=$2
 sonar_password=$3
-github_token=$4
-github_repo_url=$5
+repo_password=$4
+repo_name=$5
 service_name=$6
-github_user_name=$7
+repo_username=$7
 programming_language=$8
+repo_type=$9
 
-export GITHUB_TOKEN=$github_token
-## cloning code from gitrepo
-echo "Setting up git credentials" && git config --global credential.helper 'store' && echo "https://$github_user_name:$github_token@github.com" > ~/.git-credentials
+echo "clonning project repository"
+if [ $repo_type == "github" ]; then
+ git clone https://$repo_username:$repo_password@bitbucket.org/myacc/$repo_name.git /tmp/$service_name
+elif [ $repo_type == "azure" ]; then
+ git clone https://$repo_username:$repo_password@dev.azure.com/kuberdigitech/Kuber%20Platform/_git/$repo_name /tmp/$service_name
+else
+ git clone https://$repo_password@github.com/$repo_username/$repo_name.git /tmp/$service_name
 
-git clone $github_repo_url /tmp/$service_name 
-
-# downloding sonar scanner 
+echo "downloding sonar scanner" 
 wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
 unzip  -q  sonar-scanner-cli-4.7.0.2747-linux.zip
 export PATH="./sonar-scanner-4.7.0.2747-linux/bin:$PATH"
